@@ -1,21 +1,20 @@
+{{!-- Admin edit user --}}
 
-{{!-- users sign-up --}}
 
-
-  <div class="img-container" style="padding-left: 45rem;">
-    <img src="https://www.crestwood.com/wp-content/uploads/2019/04/Sign-up-now.jpeg" alt="Avatar" class="avatar">
+<div class="img-container" style="padding-left: 45rem;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNvOpmKI_KUG81CZNplNo4NQr6x3hSdsKUcA&usqp=CAU" alt="Avatar" class="avatar">
   </div>
 
-   <section class="p-5 bg-white" id="contact-section">
+<section class="p-5 bg-white" id="contact-section">
         <div class="container">
-            <h1 class="text-center">Sign-Up</h1>
+            <h1 class="text-center">Edit User</h1>
             <div class="row">
                 <div class="col-md-12">
                 <form id="gform" action="post">
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Name</label>
-                        <input type="text" class="form-control" autocomplete="off" name="name" id="name" maxlength="20" placeholder="Enter your name" oninput="this.value=this.value.replace(/[^A-Za-z ]|^ /g,'')" >
+                        <input type="text" class="form-control" autocomplete="off" name="name" id="name" maxlength="20" placeholder="Enter the name" oninput="this.value=this.value.replace(/[^A-Za-z ]|^ /g,'')" >
                         <p id="name-error"></p>
                       </div>
                       <div class="form-group col-md-6">
@@ -27,12 +26,12 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="inputEmail4">Email</label>
-                          <input type="email" class="form-control" id="email" maxlength="20" name="email" autocomplete="off" placeholder="Enter your email address">
+                          <input type="email" class="form-control" id="email" maxlength="20" name="email" autocomplete="off" placeholder="Enter the email address">
                           <p id="email-error"></p>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="inputPassword4">Password</label>
-                          <input type="password" class="form-control" id="mobile" maxlength="5" name="mobile" autocomplete="off" placeholder="Enter strong password">
+                          <input type="Password" class="form-control" id="mobile" maxlength="5" name="mobile" autocomplete="off" placeholder="Enter a strong password" >
                           <p id="mobile-error"></p>
                         </div>
                       </div>
@@ -40,12 +39,10 @@
                    
                     
                   <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary" id="submit-btn" style="width: 100%;" >Sign-up</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn" style="width: 100%;" >Update</button>
                 </div>
                   </form>
                 </div>
             </div>
         </div>
     </section>
-
-  
