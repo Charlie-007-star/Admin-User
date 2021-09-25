@@ -5,6 +5,7 @@ const bcrypt=require('bcrypt');
 
 module.exports = {
 
+  
     getAllUserDetails: () => {
       return new Promise(async (resolve, reject) => {
         var reuslts = await db
@@ -30,7 +31,6 @@ module.exports = {
             .collection(collection.USER_COLLECTIONS)
             .insertOne(userData)
             .then((data) => {
-              //   resolve(data.ops[0])
               resolve({ signupStatus });
             })
             .catch(() => {
@@ -137,11 +137,10 @@ module.exports = {
             .collection(collection.USER_COLLECTIONS)
             .insertOne(userData)
             .then((data) => {
-              //   resolve(data.ops[0])
               resolve({ signupStatus });
             })
             .catch(() => {
-              console.log("Error signup");
+              console.log("Error");
             });
         } else {
           console.log("user already exist");

@@ -1,3 +1,5 @@
+
+{{!-- Home --}}
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <div class="container-fluid">
@@ -20,30 +22,28 @@
               <a class="nav-link" href="/login">Log in</a>
               {{/if}}
         </li>
-       
       </ul>
     </div>
   </div>
 </nav>
 </header>
-     <section>
-     
-        <div class="container-fluid">
-            <div class="container">
-            <div class="row  mt-5">
-                {{#each products}}
-            <div class="col-md-4 ">
-                <div class="card" style="width: 20rem; height: 30rem;">
-  <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">{{this.name}}</h5>
-    <p class="card-text">{{this.descreption}}.</p>
-   
-  </div>
+
+<section>
+  <div class="container-fluid">
+   <div class="container">
+     <div class="row  mt-5">
+        {{#each products}}
+      <div class="col-md-4 ">
+        <div class="card" style="width: 20rem; height: 30rem;">
+          <img class="card-img-top" src="{{this.image}}" alt="Card image cap">
+             <div class="card-body">
+               <h5 class="card-title">{{this.name}}</h5>
+                <p class="card-text">{{this.descreption}}.</p>
+             </div>
+        </div>
+     </div>
+      {{/each}}
+   </div>
+ </div>
 </div>
-            </div>
-            {{/each}}
-        </div>
-        </div>
-        </div>
-    </section>
+</section>

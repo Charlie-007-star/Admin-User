@@ -15,21 +15,17 @@ router.get('/', function (req, res, next) {
   res.header('Cache-control','private, no-cache,no-store,max-age=0,must-revalidate,pre-check=0,post-check=0')
   if(req.session.isLoggedIn)
   {
-    
     res.redirect('/admin/home')
   }
   else
   {
-    if(req.session.attempt){
-      delete req.session.attempt
-      var message ={message: "Please enter valid username"}
-    }else{
- 
+     if(req.session.attempt){
+     delete req.session.attempt
+     var message ={message: "Please enter valid username or password"}
+     }else{
       var message = {message: " "}
-    }
-   
+     }
     res.render('admin', message) 
- 
 } 
 })
 
@@ -46,29 +42,24 @@ router.post("/adminlogin", (req, res) => {
   }
   else {
     res.header('Cache-control','private, no-cache,no-store,max-age=0,must-revalidate,pre-check=0,post-check=0')
- 
-    // res.render("admin",{message:"Please enter valid username"})
     req.session.attempt=true;
     res.redirect("/admin")
   }
 })
 
 
-// add details
+
 router.get("/home", function (req, res, next) {
   if(req.session.isLoggedIn){
-
- userHelpers.getAllUserDetails().then((data)=>{
-  res.header('Cache-control','private, no-cache,no-store,max-age=0,must-revalidate,pre-check=0,post-check=0')
+  userHelpers.getAllUserDetails().then((data)=>{
+   res.header('Cache-control','private, no-cache,no-store,max-age=0,must-revalidate,pre-check=0,post-check=0')
    res.render('adminHome',{users:data})
- }).catch((er)=>{
+  }).catch((er)=>{
    console.log(er)
- })
-  
+  })
   }else{
     res.redirect("/admin")
   }
-
 });
 
 
@@ -88,7 +79,6 @@ router.post("/addUser", (req, res) => {
 
 
 // logout admin 
-// error
 router.get('/logout',(req,res)=>{
   
  console.log(req.session.isLoggedIn);
@@ -96,9 +86,6 @@ router.get('/logout',(req,res)=>{
   console.log(req.session.isLoggedIn);
   res.header('Cache-control','private, no-cache,no-store,max-age=0,must-revalidate,pre-check=0,post-check=0')
   res.redirect('/admin')
- 
-
-
 
 })
 
@@ -114,7 +101,7 @@ router.get('/deleteUser/:id',(req,res)=>{
 
 // edit users
 router.get("/editUser/:id",async(req,res)=>{
-  console.log('this is id')
+  console.log('this id')
   console.log(req.params.id)
   let user = await userHelpers.getUserDetails(req.params.id)
   console.log("edit");
@@ -127,7 +114,6 @@ router.get("/editUser/:id",async(req,res)=>{
 router.post("/editUser/:id",async(req,res)=>{
   console.log(req.body);
   userHelpers.updateUser(req.params.id,req.body).then(()=>{
-
     res.redirect('/admin/home')
   })
 })

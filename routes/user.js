@@ -32,7 +32,6 @@ let products=[
 /* GET user home page. */
 router.get('/', function(req, res, next) {
   let user= req.session.user
-
   res.render('index', { products,user});
 });
 
@@ -45,7 +44,6 @@ router.get('/login',(req,res)=>{
   }
   else
   {
-
   res.render('userLogin',{"LoginErr":req.session.loginErr})
   }
   req.session.loginErr=false
@@ -70,7 +68,6 @@ router.post('/signup',(req,res)=>{
   userHelpers.doSignup(req.body).then((response)=>{
          console.log(response);
          if (response.signupStatus){
-
            res.redirect('/login')
          }
          else

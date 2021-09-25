@@ -19,15 +19,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// Session 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'key',
   resave: false,
   saveUninitialized: true,
   cookie: { maxAge: 600000 }
 }))
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+// database
 db.connect((err)=>{
   if(err)
   {
@@ -40,7 +42,7 @@ db.connect((err)=>{
   }
 })
 
-
+// clear cache
 app.use(function(req, res, next) {
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();

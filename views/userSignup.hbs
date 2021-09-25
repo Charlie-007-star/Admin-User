@@ -5,7 +5,6 @@
                     <h1 class="logo-badge text-whitesmoke"><span class="fa fa-user-circle"></span></h1>
                 </div>
                     <h3 class="text-dark">Sign up</h3>
-                    {{!-- <p class="text-whitesmoke">Sign In</p> --}}
                 <div class="container-content">
                     <form action="/signup" method="POST">
                         <div class="form-group">
@@ -13,7 +12,7 @@
                             <p style="color: red; padding-top: 1rem;" id="name-error"></p>
                         </div>
                          <div class="form-group mt-4">
-                            <input type="text" class="form-control" maxlenght="15" placeholder="email"  name="email" id="email">
+                            <input type="text" class="form-control" maxlenght="25" placeholder="email"  name="email" id="email">
                             <p style="color: red; padding-top: 1rem;" id="email-error"></p>
 
                         </div>
@@ -25,22 +24,16 @@
                             <input type="password" class="form-control" maxlength="10" placeholder="password"  name="password" id="password">
                            <p style="color: red; padding-top: 1rem;" id="message-error"></p>
                         </div>
-                        {{!-- <div class="form-group mt-4">
-                            <input type="password" class="form-control" placeholder="confirm password" required="">
-                        </div> --}}
                         <button type="submit" id="submit-btn" class="form-button button-l margin-b mt-4">Sign Up</button>
-        
-                        {{!-- <a class="text-darkyellow" href="#"><small>Forgot your password?</small></a> --}}
                         <p class="text-black text-center"><small>Do you already have an account?</small></p>
                         <a class="text-black" href="/login" style="text-decoration: none;"><small>Sign In</small></a>
                     </form>
-                    {{!-- <p class="margin-t text-whitesmoke"><small> Your Name &copy; 2018</small> </p> --}}
                 </div>
             </div>
-</body>
+   </body>
 </section>
 
-
+{{!-- validation --}}
 <script>
 
 var formvalid = {
@@ -241,6 +234,7 @@ $('#submit-btn').click( function(){
 </script>
 
 
+{{!-- style --}}
 <style>
     html {
     height: 100%;
