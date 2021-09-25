@@ -1,0 +1,200 @@
+
+<section class="mt-5 ml-3 mr-3">
+  <div class="pt-5">
+      <h2 class="text-center">Edit User</h2>
+  <div class="card container pt-4 pb-4">
+  <form action="/admin/editUser/{{user._id}}" method="POST" >
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email </label>
+  <input type="email" class="form-control" id="email" maxlength="15" placeholder="name@example.com" name="email" value="{{user.email}}">
+  <p style="color: red; padding-top: 1rem;" id="email-error"></p>
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label"> Name</label>
+  <input type="name" class="form-control" id="name" maxlength="15" placeholder="User name" name="username" value="{{user.username}}" oninput="this.value=this.value.replace(/[^A-Za-z ]|^ /g,'')"> 
+    <p style="color: red; padding-top: 1rem;" id="name-error"></p>
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Phone </label>
+  <input type="number" class="form-control" id="phone" maxlength="10" placeholder="Phone Number" name="phone" value="{{user.phone}}" oninput="this.value=this.value.replace(/[^0-9 ]|^ /g,'')">
+  <p style="color: red; padding-top: 1rem;" id="mobile-error"></p>
+</div>
+
+<div class="col-auto">
+    <button type="submit" id="submit-btn" class="btn btn-success mb-3">Update</button>
+  </div>
+  </form>
+</div>
+</div>
+
+</section>
+
+
+<script>
+
+
+var formvalid = {
+
+    username: false,
+    mobilename: false,
+    emailname: false
+  
+};
+
+{{!-- email --}}
+
+
+function validemail(){
+    var emailname = $("#email").val();
+
+    function emailhide(){
+        $('#email-error').hide();
+    }
+
+
+    if(emailname.length<1){
+        $('#email-error').text('Email is required').show();
+        formvalid.emailname = false;
+       
+    } else {
+
+         emailhide();
+        formvalid.emailname =  true; 
+       
+        var em = new RegExp(/^[^]+@[^]+\.[a-z]{2,3}$/);
+        if(!em.test(emailname)){
+            $('#email-error').text('Enter only valid email only.').show();
+            formvalid.emailname = false;
+           
+        } else {
+            emailhide();
+            formvalid.emailname = true;
+            
+        }
+    }
+
+}
+
+
+{{!-- name --}}
+
+
+function validname(){
+     
+    function hide(){
+        $('#name-error').hide();
+    }
+    var username= $("#name").val();
+    console.log(username);
+    if(username.length<1){
+        formvalid.username = false;
+        $('#name-error').text('Character is required.').show();
+       
+    } else {
+       hide();
+       formvalid.username = true;
+      
+        var testExp= new RegExp(/^[a-zA-Z ]+$/);
+        var testEx= new RegExp(/^[a-zA-Z ]+$/);
+        if (!testExp.test(username)){
+            $('#name-error').text('Must not have any special character or number.').show();
+            formvalid.username = false;
+           
+        } else {
+           hide();
+           formvalid.username = true;
+         
+            if (username.length<3 || username.length > 20){
+                $('#name-error').text('Must be more than 3 character and lesser than 20 character').show();
+                formvalid.username = false;
+              
+            }
+            else if(username.match(testEx)>3){
+                $('#name-error').text('Must be more than 3 character and lesser than 20 character').show();
+                formvalid.username = false;
+              
+                console.log(username.match(testEx))
+            }
+             else {
+                hide();
+                formvalid.username = true;
+               
+            }
+        }
+        
+        
+    }
+}
+
+{{!-- phone --}}
+
+
+function validmobile(){
+    var mobilename = $("#phone").val();
+
+    function mobilehide(){
+        $('#mobile-error').hide();
+    }
+
+    if(mobilename.length<1){
+        $('#mobile-error').text('Only 10 numbers required.').show();
+        formvalid.mobilename = false;
+       
+    } else {
+        mobilehide();
+        formvalid.mobilename = true;
+       
+    if(mobilename.length<10){
+        $('#mobile-error').text('Must have 10 numbers.').show();
+        formvalid.mobilename = false;
+       
+    } else {
+        mobilehide();
+        formvalid.mobilename = true;
+       
+    }
+    }
+}
+ 
+
+
+
+// name 
+$('#name').on('input',function(){
+
+   validname();
+});
+
+{{!-- email --}}
+
+// email 
+$('#email').on('input',function(){
+   
+    validemail();
+
+})
+
+// mobile number
+$('#phone').on('input',function(){
+   
+    validmobile();
+});
+
+
+
+$('#submit-btn').click( function(){
+    validemail();
+    validmobile();
+    validname();
+
+    if(formvalid.emailname && formvalid.mobilename && formvalid.username) {
+        $('#submit-btn').prop('type','submit');
+    }else {
+        $('#submit-btn').prop('type','button');
+    }
+
+})
+
+
+
+</script>

@@ -1,0 +1,442 @@
+<section>
+    <body class="main-bg">
+        <div class="login-container text-c animated flipInX">
+                <div>
+                    <h1 class="logo-badge text-whitesmoke"><span class="fa fa-user-circle"></span></h1>
+                </div>
+                    <h3 class="text-dark">Sign up</h3>
+                    {{!-- <p class="text-whitesmoke">Sign In</p> --}}
+                <div class="container-content">
+                    <form action="/signup" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" maxlength="15" placeholder="Name"  name="username" id="usersName" oninput="this.value=this.value.replace(/[^A-Za-z ]|^ /g,'')" >
+                            <p style="color: red; padding-top: 1rem;" id="name-error"></p>
+                        </div>
+                         <div class="form-group mt-4">
+                            <input type="text" class="form-control" maxlenght="15" placeholder="email"  name="email" id="email">
+                            <p style="color: red; padding-top: 1rem;" id="email-error"></p>
+
+                        </div>
+                        <div class="form-group mt-4">
+                            <input type="text" class="form-control" maxlength="10" placeholder="phone"  name="phone" id="phone" oninput="this.value=this.value.replace(/[^0-9 ]|^ /g,'')" >
+                            <p style="color: red; padding-top: 1rem;" id="mobile-error"></p>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input type="password" class="form-control" maxlength="10" placeholder="password"  name="password" id="password">
+                           <p style="color: red; padding-top: 1rem;" id="message-error"></p>
+                        </div>
+                        {{!-- <div class="form-group mt-4">
+                            <input type="password" class="form-control" placeholder="confirm password" required="">
+                        </div> --}}
+                        <button type="submit" id="submit-btn" class="form-button button-l margin-b mt-4">Sign Up</button>
+        
+                        {{!-- <a class="text-darkyellow" href="#"><small>Forgot your password?</small></a> --}}
+                        <p class="text-black text-center"><small>Do you already have an account?</small></p>
+                        <a class="text-black" href="/login" style="text-decoration: none;"><small>Sign In</small></a>
+                    </form>
+                    {{!-- <p class="margin-t text-whitesmoke"><small> Your Name &copy; 2018</small> </p> --}}
+                </div>
+            </div>
+</body>
+</section>
+
+
+<script>
+
+var formvalid = {
+
+    username: false,
+    mobilename: false,
+    messagename: false,
+    emailname: false
+  
+};
+
+{{!-- name --}}
+
+function validname(){
+     
+    function hide(){
+        $('#name-error').hide();
+    }
+    var username= $("#usersName").val();
+    console.log(username);
+    if(username.length<1){
+        formvalid.username = false;
+        $('#name-error').text('Character is required.').show();
+       
+    } else {
+       hide();
+       formvalid.username = true;
+      
+        var testExp= new RegExp(/^[a-zA-Z ]+$/);
+        var testEx= new RegExp(/^[a-zA-Z ]+$/);
+        if (!testExp.test(username)){
+            $('#name-error').text('Must not have any special character or number.').show();
+            formvalid.username = false;
+           
+        } else {
+           hide();
+           formvalid.username = true;
+         
+            if (username.length<3 || username.length > 20){
+                $('#name-error').text('Must be more than 3 character and lesser than 20 character').show();
+                formvalid.username = false;
+              
+            }
+            else if(username.match(testEx)>3){
+                $('#name-error').text('Must be more than 3 character and lesser than 20 character').show();
+                formvalid.username = false;
+              
+                console.log(username.match(testEx))
+            }
+             else {
+                hide();
+                formvalid.username = true;
+               
+            }
+        }
+        
+        
+    }
+}
+
+{{!-- email --}}
+
+
+function validemail(){
+    var emailname = $("#email").val();
+
+    function emailhide(){
+        $('#email-error').hide();
+    }
+
+
+    if(emailname.length<1){
+        $('#email-error').text('Email is required').show();
+        formvalid.emailname = false;
+       
+    } else {
+
+         emailhide();
+        formvalid.emailname =  true; 
+       
+        var em = new RegExp(/^[^]+@[^]+\.[a-z]{2,3}$/);
+        if(!em.test(emailname)){
+            $('#email-error').text('Enter only valid email only.').show();
+            formvalid.emailname = false;
+           
+        } else {
+            emailhide();
+            formvalid.emailname = true;
+            
+        }
+    }
+
+}
+
+{{!-- mobile --}}
+
+function validmobile(){
+    var mobilename = $("#phone").val();
+
+    function mobilehide(){
+        $('#mobile-error').hide();
+    }
+
+    if(mobilename.length<1){
+        $('#mobile-error').text('Only 10 numbers required.').show();
+        formvalid.mobilename = false;
+       
+    } else {
+        mobilehide();
+        formvalid.mobilename = true;
+       
+    if(mobilename.length<10){
+        $('#mobile-error').text('Must have 10 numbers.').show();
+        formvalid.mobilename = false;
+       
+    } else {
+        mobilehide();
+        formvalid.mobilename = true;
+       
+    }
+    }
+}
+
+{{!-- password --}}
+
+function validmessage(){
+    var messagename =$("#password").val();
+
+    function messagehide(){
+        $('#message-error').hide();
+    }
+
+    if(messagename.length<1){
+        $('#message-error').text('Password is required').show();
+        formvalid.messagename = false;
+       
+    } else {
+        messagehide();
+        formvalid.messagename = true;
+       
+        if(messagename.length<6){
+            $('#message-error').text('Atleast 6 Characters or numbers required.').show();
+            formvalid.messagename = false;
+           
+        } else {
+            messagehide();
+            formvalid.messagename = true;
+         
+        }
+    }
+}
+
+
+
+// name 
+$('#usersName').on('input',function(){
+
+   validname();
+});
+
+{{!-- email --}}
+
+// email 
+$('#email').on('input',function(){
+   
+    validemail();
+
+})
+
+// mobile number
+$('#phone').on('input',function(){
+   
+    validmobile();
+});
+
+
+// message box
+$('#password').on('input',function(){
+  
+    validmessage();
+});
+
+$('#submit-btn').click( function(){
+    validmessage();
+    validemail();
+    validmobile();
+    validname();
+
+    if(formvalid.emailname && formvalid.mobilename && formvalid.messagename && formvalid.username) {
+        $('#submit-btn').prop('type','submit');
+    }else {
+        $('#submit-btn').prop('type','button');
+    }
+
+})
+
+
+</script>
+
+
+<style>
+    html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Text Align */
+.text-c {
+    text-align: center;
+}
+.text-l {
+    text-align: left;
+}
+.text-r {
+    text-align: right
+}
+.text-j {
+    text-align: justify;
+}
+
+/* Text Color */
+.text-whitesmoke {
+    color: whitesmoke
+}
+.text-darkyellow {
+    color: rgba(255, 235, 59, 0.432)
+}
+
+/* Lines */
+
+.line-b {
+    border-bottom: 1px solid #030303 !important;
+}
+
+/* Buttons */
+.button {
+    border-radius: 3px;
+}
+.form-button {
+    background-color: rgba(14, 238, 6, 0.24);
+    border-color: rgba(7, 241, 19, 0.24);
+    color: #fb0000;
+}
+.form-button:hover,
+.form-button:focus,
+.form-button:active,
+.form-button.active,
+.form-button:active:focus,
+.form-button:active:hover,
+.form-button.active:hover,
+.form-button.active:focus {
+    background-color: rgba(69, 255, 22, 0.473);
+    border-color: rgba(106, 255, 6, 0.473);
+    color: #e6e6e6;
+}
+.button-l {
+    width: 100% !important;
+}
+
+/* Margins g(global) - l(left) - r(right) - t(top) - b(bottom) */
+
+.margin-g {
+    margin: 15px;
+}
+.margin-g-sm {
+    margin: 10px;
+}
+.margin-g-md {
+    margin: 20px;
+}
+.margin-g-lg {
+    margin: 30px;
+}
+
+.margin-l {
+    margin-left: 15px;
+}
+.margin-l-sm {
+    margin-left: 10px;
+}
+.margin-l-md {
+    margin-left: 20px;
+}
+.margin-l-lg {
+    margin-left: 30px;
+}
+
+.margin-r {
+    margin-right: 15px;
+}
+.margin-r-sm {
+    margin-right: 10px;
+}
+.margin-r-md {
+    margin-right: 20px;
+}
+.margin-r-lg {
+    margin-right: 30px;
+}
+
+.margin-t {
+    margin-top: 15px;
+}
+.margin-t-sm {
+    margin-top: 10px;
+}
+.margin-t-md {
+    margin-top: 20px;
+}
+.margin-t-lg {
+    margin-top: 30px;
+}
+
+.margin-b {
+    margin-bottom: 15px;
+}
+.margin-b-sm {
+    margin-bottom: 10px;
+}
+.margin-b-md {
+    margin-bottom: 20px;
+}
+.margin-b-lg {
+    margin-bottom: 30px;
+}
+
+/* Bootstrap Form Control Extension */
+
+.form-control,
+.border-line {
+    background-color: #5f5f5f;
+    background-image: none;
+    border: 1px solid #000000;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+.form-control:focus,
+.border-line:focus {
+    border-color: #000000;
+    background-color: #000000;
+    color: #e6e6e6;
+}
+.form-control,
+.form-control:focus {
+    box-shadow: none;
+}
+.form-control::-webkit-input-placeholder { color: #BDBDBD; }
+
+/* Container */
+
+.container-content {
+    background-color: #fffffff5;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #ffffff;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0;
+}
+
+/* Backgrounds */
+
+.main-bg {
+
+    background: #424242;
+    background: linear-gradient( #ffffff, #ffffff);
+}
+
+/* Login & Register Pages*/
+
+.login-container {
+    max-width: 400px;
+    z-index: 100;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+.login.login-container {
+    width: 300px;
+}
+.wrapper.login-container {
+    margin-top: 140px;
+}
+.logo-badge {
+    color: #e6e6e6;
+    font-size: 80px;
+    font-weight: 800;
+    letter-spacing: -10px;
+    margin-bottom: 0;
+}
+</style>
